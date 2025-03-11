@@ -102,7 +102,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Head>
-        <title>Dashboard | FitConnect</title>
+        <title>Dashboard | Ripped</title>
         <meta
           name="description"
           content="Manage your personal training sessions"
@@ -113,7 +113,7 @@ export default function Dashboard() {
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">FitConnect</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Ripped</h1>
             <div className="flex items-center space-x-4">
               <span className="text-gray-700">
                 Hi, {userData?.name || "User"}
@@ -375,7 +375,7 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500">
-              © 2025 FitConnect. All rights reserved.
+              © 2025 Ripped. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <Link href="/help" className="text-gray-500 hover:text-gray-700">
