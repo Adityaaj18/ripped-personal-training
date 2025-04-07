@@ -1,26 +1,23 @@
-"use client"
- 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
- 
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import CustomFormField from "../CustomFormField";
+
+export enum FormFieldType {
+  INPUT: 'input'
+}
+
 const formSchema = z.object({
-  username: z.string().min(2, { 
+  username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
-})
- 
+});
+
 const CustomerForm = () => {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -28,13 +25,13 @@ const CustomerForm = () => {
     defaultValues: {
       username: "",
     },
-  })
- 
+  });
+
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+    console.log(values);
   }
   return (
     <Form {...form}>
@@ -43,26 +40,12 @@ const CustomerForm = () => {
           <h1 className="header">Hi there 👋</h1>
           <p className="text-dark-700">Schedule your first appointment</p>
         </section>
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <CustomFormField fieldType={FormFieldType.INPUT} control={form.control} />
+
         <Button type="submit">Submit</Button>
       </form>
     </Form>
-  )
-}
+  );
+};
 
-export default CustomerForm
+export default CustomerForm;
