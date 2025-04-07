@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import PatientForm from "@/components/ui/forms/CustomerForm";
+import PatientForm from "@/components/ui/forms/CustomerForm"
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
