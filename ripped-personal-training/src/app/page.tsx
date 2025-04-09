@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import PatientForm from "@/components/ui/forms/CustomerForm"
+import CustomerForm from "@/components/ui/forms/CustomerForm"
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -18,7 +18,7 @@ export default function Home() {
             alt="ripped"
             className="mb-12 h-10 w-fit"
           />
-          <PatientForm />
+          <CustomerForm />
           <div className="text-14-regular mt-20 flex justify-between">
             <p className="justify-items-end text-dark-600 xl:text-left">
               © 2025 Ripped
