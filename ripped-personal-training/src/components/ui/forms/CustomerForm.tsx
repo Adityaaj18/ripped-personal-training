@@ -25,7 +25,7 @@ export enum FormFieldType {
 }
 
 const CustomerForm = () => {
-  const router =  useRouter()
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   // 1. Define your form.
   const form = useForm<z.infer<typeof UserFormValidation>>({
@@ -45,18 +45,36 @@ const CustomerForm = () => {
   }: z.infer<typeof UserFormValidation>) {
     setIsLoading(true);
 
-    try {
-      const userData = {
-        name,
-        email,
-        phone,
-      };
-      const user = await createUser(userData);
+    const userData = {
+      name,
+      email,
+      phone,
+    };
+    // try {
 
-      if(user) router.push(`/customers/${user.$id}/register`)
-      
+    //   const user = await createUser(userData);
+    //   if (user) {
+    //     console.log(user);
+
+    //     router.push(`/customers/${user.$id}/register`);
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    //setIsLoading(false);
+
+    try {
+      const user = await createUser(userData);
+      if (user) {
+        router.push(`/customers/${user.$id}/register`);
+      } else {
+        console.error("User is null");
+      }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
   return (
