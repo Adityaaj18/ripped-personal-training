@@ -15,9 +15,11 @@ import { useRouter } from "next/navigation";
 import { createUser } from "../../../../lib/actions/customer.actions";
 import { FormFieldType } from "./CustomerForm";
 //import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
-import { GenderOptions } from "../../../../constants";
+import { GenderOptions, Trainers } from "../../../../constants";
 import { RadioGroup, RadioGroupItem } from "../radio-group";
 import { Label } from "../label";
+import { SelectItem } from "../select";
+import Image from "next/image";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -146,7 +148,68 @@ const RegisterForm = ({ user }: { user: User }) => {
             )}
           />
         </div>
-        <div className="flex flex-col gap-6 xl:flex-row"></div>
+        <div className="flex flex-col gap-6 xl:flex-row">
+          <CustomFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name="adress"
+            label="Address"
+            placeholder="Aungier Street, Dublin 2"
+          />
+          <CustomFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name="occupation"
+            label="Occupation"
+            placeholder="Software Engineer"
+          />
+        </div>
+
+        <div className="flex flex-col gap-6 xl:flex-row">
+          <CustomFormField
+            fieldType={FormFieldType.INPUT}
+            control={form.control}
+            name="emergencyContactName"
+            label="Emergency contact name"
+            placeholder="Emergency contact name"
+          />
+          <CustomFormField
+            fieldType={FormFieldType.PHONE_INPUT}
+            control={form.control}
+            name="EmegencyContactNumber"
+            label="Emergency contact number"
+            placeholder="(353) 089-123-4567"
+          />
+        </div>
+
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Training History</h2>
+          </div>
+        </section>
+        <CustomFormField
+          fieldType={FormFieldType.SELECT}
+          control={form.control}
+          name="primaryTrainer"
+          label="Trainer"
+          placeholder="Select your trainer"
+        >
+          {Trainers.map((trainer) => (
+            <SelectItem key={trainer.name} value={trainer.name}>
+              <div className="flex curson-pointer items-center gap-2">
+                <Image
+                  src={trainer.image}
+                  width={32}
+                  height={32}
+                  alt={trainer.name}
+                  className="rounded full border border-dark-500"
+                />
+                <p>{trainer.name}</p>
+              </div>
+            </SelectItem>
+          ))}
+        </CustomFormField>
+
         <div className="flex flex-col gap-6 xl:flex-row"></div>
         <div className="flex flex-col gap-6 xl:flex-row"></div>
         <div className="flex flex-col gap-6 xl:flex-row"></div>
