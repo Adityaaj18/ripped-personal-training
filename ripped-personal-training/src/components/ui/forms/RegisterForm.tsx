@@ -15,11 +15,16 @@ import { useRouter } from "next/navigation";
 import { createUser } from "../../../../lib/actions/customer.actions";
 import { FormFieldType } from "./CustomerForm";
 //import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
-import { GenderOptions, Trainers } from "../../../../constants";
+import {
+  GenderOptions,
+  IdentificationTypes,
+  Trainers,
+} from "../../../../constants";
 import { RadioGroup, RadioGroupItem } from "../radio-group";
 import { Label } from "../label";
 import { SelectItem } from "../select";
 import Image from "next/image";
+import FileUploader from "@/components/FileUploader";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -210,9 +215,53 @@ const RegisterForm = ({ user }: { user: User }) => {
           ))}
         </CustomFormField>
 
-        <div className="flex flex-col gap-6 xl:flex-row"></div>
-        <div className="flex flex-col gap-6 xl:flex-row"></div>
-        <div className="flex flex-col gap-6 xl:flex-row"></div>
+        <div className="flex flex-col gap-6 xl:flex-row">
+          <CustomFormField
+            fieldType={FormFieldType.TEXTAREA}
+            control={form.control}
+            name="additionalInfo"
+            label="Additional information (If any)"
+            placeholder="I have a knee injury"
+          />
+        </div>
+
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Identification and Verification</h2>
+          </div>
+        </section>
+        <CustomFormField
+          fieldType={FormFieldType.SELECT}
+          control={form.control}
+          name="identificationType"
+          label="Identification Type"
+          placeholder="Select identification type"
+        >
+          {IdentificationTypes.map((type) => (
+            <SelectItem key={type} value={type}>
+              {type}
+            </SelectItem>
+          ))}
+        </CustomFormField>
+        <CustomFormField
+          fieldType={FormFieldType.INPUT}
+          control={form.control}
+          name="identificationNumber"
+          label="Identification Number"
+          placeholder="123456789"
+        />
+
+<CustomFormField
+            fieldType={FormFieldType.SKELETON}
+            control={form.control}
+            name="identificationDocument"
+            label="Scanned copy of identification Document"
+            renderSkeleton={(field) => (
+              <FormControl>
+                <FileUploader />
+              </FormControl>
+            )}
+          />
 
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>

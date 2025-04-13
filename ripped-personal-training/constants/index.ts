@@ -42,24 +42,24 @@ export const IdentificationTypes = [
 
 export const Trainers = [
   {
-    image: "/assets/images/dr-green.png",
-    name: "John Green",
+    image: "/assets/images/arnold.jpg",
+    name: "Arnold Schwarzenegger",
   },
   {
-    image: "/assets/images/dr-cameron.png",
-    name: "Leila Cameron",
+    image: "/assets/images/ronnie.jpg",
+    name: "Ronnie Coleman",
   },
   {
-    image: "/assets/images/dr-livingston.png",
-    name: "David Livingston",
+    image: "/assets/images/jay.jpg",
+    name: "Jay Cutler",
   },
   {
-    image: "/assets/images/dr-peter.png",
-    name: "Evan Peter",
+    image: "/assets/images/phil.jpg",
+    name: "Phil Heath",
   },
   {
-    image: "/assets/images/dr-powell.png",
-    name: "Jane Powell",
+    image: "/assets/images/dorian.png",
+    name: "Dorian Yates",
   },
   {
     image: "/assets/images/dr-remirez.png",
