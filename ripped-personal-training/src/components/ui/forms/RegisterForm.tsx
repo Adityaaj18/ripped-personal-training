@@ -9,13 +9,14 @@ import { Input } from "@/components/ui/input";
 import CustomFormField from "../CustomFormField";
 import SubmitButton from "../../SubmitButton";
 import { useState } from "react";
-import { UserFormValidation } from "@/lib/validation";
+import { CustomerFormValidation, UserFormValidation } from "@/lib/validation";
 import { create } from "domain";
 import { useRouter } from "next/navigation";
-import { createUser } from "../../../../lib/actions/customer.actions";
+import { createUser, registerCustomer } from "../../../../lib/actions/customer.actions";
 import { FormFieldType } from "./CustomerForm";
 //import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import {
+  customerFormDefaultValues,
   GenderOptions,
   IdentificationTypes,
   Trainers,
@@ -30,9 +31,10 @@ const RegisterForm = ({ user }: { user: User }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   // 1. Define your form.
-  const form = useForm<z.infer<typeof UserFormValidation>>({
-    resolver: zodResolver(UserFormValidation),
+  const form = useForm<z.infer<typeof CustomerFormValidation>>({
+    resolver: zodResolver(CustomerFormValidation),
     defaultValues: {
+      ...customerFormDefaultValues,
       name: "",
       email: "",
       phone: "",
@@ -40,39 +42,33 @@ const RegisterForm = ({ user }: { user: User }) => {
   });
 
   // 2. Define a submit handler.
-  async function onSubmit({
-    name,
-    email,
-    phone,
-  }: z.infer<typeof UserFormValidation>) {
+  async function onSubmit(values: z.infer<typeof CustomerFormValidation>) {
+    console.log('clicked');
+    
     setIsLoading(true);
 
-    const userData = {
-      name,
-      email,
-      phone,
-    };
-    // try {
+    let formData;
+    if(values.identificationDocument && values.identificationDocument.length > 0){
+      const blobFile = new Blob([values.identificationDocument[0]], {
+        type: values.identificationDocument[0].type
+      })
 
-    //   const user = await createUser(userData);
-    //   if (user) {
-    //     console.log(user);
-
-    //     router.push(`/customers/${user.$id}/register`);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
-    //setIsLoading(false);
+      formData = new FormData()
+      formData.append('blobFile', blobFile) 
+      formData.append('fileName', values.identificationDocument[0].name)
+    }
 
     try {
-      const user = await createUser(userData);
-      if (user) {
-        router.push(`/customers/${user.$id}/register`);
-      } else {
-        console.error("User is null");
+      const customerData = {
+        ...values,
+        userId: user.$id,
+        birthDate: new Date(values.birthDate),
+        identificationDocument: formData,
       }
+
+      //@ts-ignore
+      const customer = await registerCustomer(customerData)
+      if(customer) router.push(`/patients/${user.$id}/new-appointment`)
     } catch (error) {
       console.log(error);
     } finally {
@@ -251,17 +247,29 @@ const RegisterForm = ({ user }: { user: User }) => {
           placeholder="123456789"
         />
 
-<CustomFormField
-            fieldType={FormFieldType.SKELETON}
-            control={form.control}
-            name="identificationDocument"
-            label="Scanned copy of identification Document"
-            renderSkeleton={(field) => (
-              <FormControl>
-                <FileUploader />
-              </FormControl>
-            )}
-          />
+        <CustomFormField
+          fieldType={FormFieldType.SKELETON}
+          control={form.control}
+          name="identificationDocument"
+          label="Scanned copy of identification Document"
+          renderSkeleton={(field) => (
+            <FormControl>
+              <FileUploader files={field.value} onChange={field.onChange} />
+            </FormControl>
+          )}
+        />
+        {/* <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Consent and Privacy</h2>
+          </div>
+        </section> */}
+        {/* <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="trainingConsent"
+          label="I agree to the terms and conditions"
+          placeholder="I agree to the terms and conditions"
+        /> */}
 
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
