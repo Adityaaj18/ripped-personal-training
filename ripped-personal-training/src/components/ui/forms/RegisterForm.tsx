@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl } from "@/components/ui/form";
+import { Form, FormControl } from "../form";
 import { Input } from "@/components/ui/input";
 import CustomFormField from "../CustomFormField";
 import SubmitButton from "../../SubmitButton";
@@ -12,7 +12,10 @@ import { useState } from "react";
 import { CustomerFormValidation, UserFormValidation } from "@/lib/validation";
 import { create } from "domain";
 import { useRouter } from "next/navigation";
-import { createUser, registerCustomer } from "../../../../lib/actions/customer.actions";
+import {
+  createUser,
+  registerCustomer,
+} from "../../../../lib/actions/customer.actions";
 import { FormFieldType } from "./CustomerForm";
 //import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import {
@@ -37,14 +40,15 @@ const RegisterForm = ({ user }: { user: User }) => {
       ...customerFormDefaultValues,
       name: "",
       email: "",
-      phone: "",
+      phone: "",  
     },
   });
 
   // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof CustomerFormValidation>) {
-    console.log('clicked');
-    
+  
+  const onSubmit = async (values: z.infer<typeof CustomerFormValidation>) => {
+    console.log('clicked', values);
+
     setIsLoading(true);
 
     let formData;
@@ -54,7 +58,7 @@ const RegisterForm = ({ user }: { user: User }) => {
       })
 
       formData = new FormData()
-      formData.append('blobFile', blobFile) 
+      formData.append('blobFile', blobFile)
       formData.append('fileName', values.identificationDocument[0].name)
     }
 
@@ -153,7 +157,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
-            name="adress"
+            name="address"
             label="Address"
             placeholder="Aungier Street, Dublin 2"
           />
@@ -177,7 +181,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.PHONE_INPUT}
             control={form.control}
-            name="EmegencyContactNumber"
+            name="emergencyContactNumber"
             label="Emergency contact number"
             placeholder="(353) 089-123-4567"
           />
