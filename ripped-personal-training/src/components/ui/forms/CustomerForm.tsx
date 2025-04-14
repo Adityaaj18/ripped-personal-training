@@ -65,12 +65,10 @@ const CustomerForm = () => {
     //setIsLoading(false);
 
     try {
-      const user = await createUser(userData);
-      if (user) {
-        router.push(`/customers/${user.$id}/register`);
-      } else {
-        console.error("User is null");
-      }
+      const user = await createUser(userData)
+      console.log(user);
+      
+      if (user) router.push(`/customers/${user.$id}/register`);
     } catch (error) {
       console.log(error);
     } finally {

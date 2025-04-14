@@ -1,9 +1,9 @@
 "use server";
-import { Databases, ID, Query } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import {
   BUCKET_ID,
-  database,
-  DATABSE_ID,
+  databases,
+  DATABASE_ID,
   ENDPOINT,
   PROJECT_ID,
   CUSTOMER_COLLECTION_ID,
@@ -40,6 +40,8 @@ export const getUser = async (userId: string) => {
   }
 };
 
+//create customer 
+
 export const registerCustomer = async ({
   identificationDocument,
   ...customer
@@ -57,18 +59,22 @@ export const registerCustomer = async ({
       file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile);
     }
 
-    const newCustomer = await database.createDocument(
-      DATABSE_ID!,
+    const newCustomer = await databases.createDocument(
+      DATABASE_ID!,
       CUSTOMER_COLLECTION_ID!,
       ID.unique(),
       {
-        identificationDocumentId: file?.$id || null,
-        identificationDocumentUrl: `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file?.$id}/view?project=${PROJECT_ID}`,
+        identificationDocumentId: file?.$id ? file?.$id : null,
+        identificationDocumentUrl: file?.$id
+          ? `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file?.$id}/view??project=${PROJECT_ID}`
+          : null,
         ...customer,
       }
     );
+    console.log('aaaa', newCustomer);
+    
 
-    return parseStringify(newCustomer)
+    return parseStringify(newCustomer);
   } catch (error) {
     console.log(error);
   }
