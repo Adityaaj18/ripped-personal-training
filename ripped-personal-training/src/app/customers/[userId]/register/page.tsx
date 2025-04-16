@@ -2,10 +2,13 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import RegisterForm from "@/components/ui/forms/RegisterForm";
-import { getUser } from "../../../../../lib/actions/customer.actions";
+import { getUser } from "../../../../../lib/actions/customer.actions"; 
+
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
   const user = await getUser(userId);
+
+  
   return (
     <div className="flex h-screen max-h-screen">
       {/* {todo: otp verification} */}
