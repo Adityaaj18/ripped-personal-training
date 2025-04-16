@@ -13,6 +13,7 @@ import { UserFormValidation } from "@/lib/validation";
 import { create } from "domain";
 import { useRouter } from "next/navigation";
 import { createUser } from "../../../../lib/actions/customer.actions";
+import { databases } from "../../../../lib/appwrite.config";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -50,25 +51,15 @@ const CustomerForm = () => {
       email,
       phone,
     };
-    // try {
-
-    //   const user = await createUser(userData);
-    //   if (user) {
-    //     console.log(user);
-
-    //     router.push(`/customers/${user.$id}/register`);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
-    //setIsLoading(false);
 
     try {
-      const user = await createUser(userData)
-      console.log(user);
       
-      if (user) router.push(`/customers/${user.$id}/register`);
+      const user = await createUser(userData);
+      console.log(user);
+
+      if (user) {
+        router.push(`/customers/${user.$id}/register`);
+      }
     } catch (error) {
       console.log(error);
     } finally {
