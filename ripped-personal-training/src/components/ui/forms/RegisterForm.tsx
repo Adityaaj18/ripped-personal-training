@@ -19,7 +19,7 @@ import {
 import { FormFieldType } from "./CustomerForm";
 //import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
 import {
-  customerFormDefaultValues,
+  CustomerFormDefaultValues,
   GenderOptions,
   IdentificationTypes,
   Trainers,
@@ -37,7 +37,7 @@ const RegisterForm = ({ user }: { user: User }) => {
   const form = useForm<z.infer<typeof CustomerFormValidation>>({
     resolver: zodResolver(CustomerFormValidation),
     defaultValues: {
-      ...customerFormDefaultValues,
+      ...CustomerFormDefaultValues,
       name: "",
       email: "",
       phone: "",  

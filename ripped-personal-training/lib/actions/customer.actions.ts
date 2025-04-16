@@ -40,7 +40,7 @@ export const getUser = async (userId: string) => {
   }
 };
 
-//create customer 
+//create customer
 
 export const registerCustomer = async ({
   identificationDocument,
@@ -71,10 +71,22 @@ export const registerCustomer = async ({
         ...customer,
       }
     );
-    console.log('aaaa', newCustomer);
-    
 
     return parseStringify(newCustomer);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCustomer = async (userId: string) => {
+  try {
+    const customers = await databases.listDocuments(
+      DATABASE_ID!,
+      CUSTOMER_COLLECTION_ID!,
+      [Query.equal("userId", userId)]
+    );
+
+    return parseStringify(customers?.documents[0]);
   } catch (error) {
     console.log(error);
   }

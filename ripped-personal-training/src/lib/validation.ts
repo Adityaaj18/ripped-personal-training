@@ -53,8 +53,19 @@ export const CustomerFormValidation = z.object({
  
 });
 
+//appointment form validation
+// export const AppointmentFormValidation = z.object({
+//   userId: z.string().min(1, "User ID is required"),
+//   customer: z.string().min(1, "Customer ID is required"),
+//   primaryTrainer: z.string().min(1, "Trainer is required"),
+//   schedule: z.date(),
+//   reason: z.string().optional(),
+//   note: z.string().optional(),
+//   cancellationReason: z.string().optional(),
+// });
+
 export const CreateAppointmentSchema = z.object({
-  primaryPhysician: z.string().min(2, "Select at least one doctor"),
+  primaryTrainer: z.string().min(2, "Select at least one doctor"),
   schedule: z.coerce.date(),
   reason: z
     .string()
@@ -65,7 +76,7 @@ export const CreateAppointmentSchema = z.object({
 });
 
 export const ScheduleAppointmentSchema = z.object({
-  primaryPhysician: z.string().min(2, "Select at least one doctor"),
+  primaryTrainer: z.string().min(2, "Select at least one doctor"),
   schedule: z.coerce.date(),
   reason: z.string().optional(),
   note: z.string().optional(),
@@ -73,7 +84,7 @@ export const ScheduleAppointmentSchema = z.object({
 });
 
 export const CancelAppointmentSchema = z.object({
-  primaryPhysician: z.string().min(2, "Select at least one doctor"),
+  primaryTrainer: z.string().min(2, "Select at least one doctor"),
   schedule: z.coerce.date(),
   reason: z.string().optional(),
   note: z.string().optional(),

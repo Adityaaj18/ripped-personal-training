@@ -1,6 +1,6 @@
 export const GenderOptions = ["male", "female", "other"];
 
-export const customerFormDefaultValues = {
+export const CustomerFormDefaultValues = {
   firstName: "",
   lastName: "",
   email: "",
