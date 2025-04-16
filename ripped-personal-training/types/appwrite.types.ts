@@ -1,7 +1,7 @@
 //copilot
 import { Models } from "node-appwrite";
 
-export interface Patient extends Models.Document {
+export interface Customer extends Models.Document {
   userId: string;
   name: string;
   email: string;
@@ -26,10 +26,10 @@ export interface Patient extends Models.Document {
 }
 
 export interface Appointment extends Models.Document {
-  patient: Patient;
+  customer: Customer;
   schedule: Date;
   status: Status;
-  primaryPhysician: string;
+  primaryTrainer: string;
   reason: string;
   note: string;
   userId: string;
