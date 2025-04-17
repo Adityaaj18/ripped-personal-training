@@ -57,8 +57,8 @@ The Training Appointments Management System provides a structured interface for 
 ## ✨ Core Features
 
 ### 👥 Customer
-- **User Registration/Login**  
-  Secure authentication using Appwrite’s built-in Auth services.
+- **User Registration**  
+  Registering user to the app.
 - **Book Appointments with Trainers**  
   Real-time booking interface with available trainer slots.
 - **Receive SMS on Confirmation**  
