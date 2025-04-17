@@ -218,6 +218,56 @@ const AppointmentForm = ({
             </div>
           </>
         )}
+        {type === "schedule" && (
+          <>
+            <CustomFormField
+              fieldType={FormFieldType.SELECT}
+              control={form.control}
+              name="primaryTrainer"
+              label="Trainer"
+              placeholder="Select your trainer"
+            >
+              {Trainers.map((trainer) => (
+                <SelectItem key={trainer.name} value={trainer.name}>
+                  <div className="flex curson-pointer items-center gap-2">
+                    <Image
+                      src={trainer.image}
+                      width={32}
+                      height={32}
+                      alt={trainer.name}
+                      className="rounded full border border-dark-500"
+                    />
+                    <p>{trainer.name}</p>
+                  </div>
+                </SelectItem>
+              ))}
+            </CustomFormField>
+            <CustomFormField
+              fieldType={FormFieldType.DATE_PICKER}
+              control={form.control}
+              name="schedule"
+              label="Expected appointment date"
+              showTimeSelect
+              dateFormat="MM/dd/yyyy - h:mm aa"
+            />
+            <div className="flex flex-col gap-6 xl:flex-row">
+              <CustomFormField
+                fieldType={FormFieldType.TEXTAREA}
+                control={form.control}
+                name="reason"
+                label="What's your goal? (to loose weight, build muscle, etc.)"
+                placeholder="Enter your goal"
+              />
+              <CustomFormField
+                fieldType={FormFieldType.TEXTAREA}
+                control={form.control}
+                name="note"
+                label="Notes"
+                placeholder="Enter notes"
+              />
+            </div>
+          </>
+        )}
 
         {type === "cancel" && (
           <CustomFormField
