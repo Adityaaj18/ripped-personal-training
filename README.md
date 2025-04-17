@@ -1,6 +1,6 @@
 # 📅 Ripped Training Appointments Management System
 
-[Link](https://ripped-personal-training-kset-git-main-adityaaj18s-projects.vercel.app/)
+[Deployed Link](https://ripped-personal-training-kset-git-main-adityaaj18s-projects.vercel.app/)
 
 ---
 
