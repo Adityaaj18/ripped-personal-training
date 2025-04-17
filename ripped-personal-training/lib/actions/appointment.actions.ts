@@ -125,25 +125,25 @@ export const updateAppointment = async ({
 };
 
 //delete
-// export const deleteAppointment = async ({
-//   appointmentId,
-// }: {
-//   appointmentId: string;
-// }) => {
-//   try {
-//     const deleted = await databases.deleteDocument(
-//       DATABASE_ID!,
-//       APPOINTMENT_COLLECTION_ID!,
-//       appointmentId
-//     );
+export const deleteAppointment = async ({
+  appointmentId,
+}: {
+  appointmentId: string;
+}) => {
+  try {
+    const deleted = await databases.deleteDocument(
+      DATABASE_ID!,
+      APPOINTMENT_COLLECTION_ID!,
+      appointmentId
+    );
 
-//     revalidatePath("/admin");
-//     return { success: true, message: "Appointment deleted", data: deleted };
-//   } catch (error) {
-//     console.log(error);
-//     return { success: false, message: "Failed to delete appointment", error };
-//   }
-// };
+    revalidatePath("/admin");
+    return { success: true, message: "Appointment deleted", data: deleted };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Failed to delete appointment", error };
+  }
+};
 
 //SMS function
 export const sendSMSNotification = async (userId: string, content: string) => {

@@ -55,3 +55,7 @@ declare type SearchParamProps = {
     appointment: Appointment;
     type: string;
   };
+
+  type DeleteAppointmentParams = {
+    appointmentId: string;
+  };

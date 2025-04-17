@@ -22,6 +22,7 @@ import { SelectItem } from "../select";
 import Image from "next/image";
 import {
   createAppointment,
+  deleteAppointment,
   updateAppointment,
 } from "../../../../lib/actions/appointment.actions";
 import { Appointment } from "../../../../types/appwrite.types";
@@ -35,7 +36,7 @@ const AppointmentForm = ({
 }: {
   userId: string;
   customerId: string;
-  type: "create" | "cancel" | "schedule";
+  type: "create" | "cancel" | "schedule" | "delete";
   appointment?: Appointment;
   setOpen?: (open: boolean) => void;
 }) => {
@@ -46,8 +47,10 @@ const AppointmentForm = ({
   const form = useForm<z.infer<typeof AppointmentFormValidation>>({
     resolver: zodResolver(AppointmentFormValidation),
     defaultValues: {
-      primaryTrainer: appointment ?  appointment.primaryTrainer: '',
-      schedule: appointment ? new Date(appointment?.schedule) : new Date(Date.now()),
+      primaryTrainer: appointment ? appointment.primaryTrainer : "",
+      schedule: appointment
+        ? new Date(appointment?.schedule)
+        : new Date(Date.now()),
       reason: appointment ? appointment.reason : "",
       note: appointment?.note || "",
       cancellationReason: appointment?.cancellationReason || "",
@@ -66,13 +69,23 @@ const AppointmentForm = ({
       case "cancel":
         status = "cancelled";
         break;
+      case "delete":
+        status = "deleted";
       default:
         status = "pending";
         break;
     }
 
     try {
-      if (type === "create" && customerId) {
+      if (type === "delete") {
+        const deletedAppointment = await deleteAppointment({
+          appointmentId: appointment?.$id!,
+        });
+        if (deletedAppointment) {
+          setOpen && setOpen(false);
+          form.reset();
+        }
+      } else if (type === "create" && customerId) {
         const appointmentData = {
           userId,
           customer: customerId,
@@ -93,6 +106,7 @@ const AppointmentForm = ({
         const appointmentToUpdate = {
           userId,
           appointmentId: appointment?.$id!,
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           appointment: {
             primaryTrainer: values?.primaryTrainer,
             schedule: new Date(values?.schedule),
@@ -109,6 +123,16 @@ const AppointmentForm = ({
           form.reset();
         }
       }
+      //delete
+      // else if (type === "delete") {
+      //   const deletedAppointment = await deleteAppointment({
+      //     appointmentId: appointment?.$id!,
+      //   });
+      //   if (deletedAppointment) {
+      //     setOpen && setOpen(false);
+      //     form.reset();
+      //   }
+      // }
     } catch (error) {
       console.log(error);
     } finally {
@@ -127,6 +151,8 @@ const AppointmentForm = ({
     case "schedule":
       buttonLabel = "Schedule Appointment";
       break;
+    case "delete":
+      buttonLabel = "Delete Appointment";
     default:
       break;
   }
@@ -142,7 +168,7 @@ const AppointmentForm = ({
             </p>
           </section>
         )}
-        {type !== "cancel" && (
+        {type === "schedule" && (
           <>
             <CustomFormField
               fieldType={FormFieldType.SELECT}
@@ -203,9 +229,20 @@ const AppointmentForm = ({
           />
         )}
 
+        {type === "delete" && (
+          <CustomFormField
+            fieldType={FormFieldType.TEXTAREA}
+            control={form.control}
+            name="deleteAppointment"
+            // label="Reason for cancellation"
+            placeholder="Enter reason for cancellation (optional)"
+          />
+        )}
+
         <SubmitButton
           isLoading={isLoading}
-          className={`${type === "cancel" ? "shad-danger-btn" : "shad-primary-btn"} w-full`}
+          // className={`${type === "cancel" ? "shad-danger-btn" : "shad-primary-btn"} w-full`}
+          className={`${(type === "cancel" && "shad-danger-btn") || (type === "create" && "shad-primary-btn") || (type === "schedule" && "shad-primary-btn") || (type === "delete" && "shad-danger-btn")} w-full`}
         >
           {buttonLabel}
         </SubmitButton>
