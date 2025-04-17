@@ -1,4 +1,4 @@
-# 📅 Training Appointments Management System
+# 📅 Ripped Training Appointments Management System
 
 A modern web-based platform to schedule, manage, and confirm training appointments with real-time SMS notifications and an intuitive admin dashboard.
 
@@ -6,7 +6,7 @@ A modern web-based platform to schedule, manage, and confirm training appointmen
 
 ## 📌 Abstract
 
-The **Training Appointments Management System** simplifies the process of scheduling sessions with personal trainers. With features like registration, booking, file uploads, SMS notifications, and an admin dashboard for appointment management, the system enhances user experience while ensuring scalability and performance through a robust tech stack.
+The **Ripped Training Appointments Management System** simplifies the process of scheduling sessions with personal trainers. With features like registration, booking, file uploads, SMS notifications, and an admin dashboard for appointment management, the system enhances user experience while ensuring scalability and performance through a robust tech stack.
 
 ---
 
