@@ -21,7 +21,6 @@ The **Ripped Training Appointments Management System** simplifies the process of
 - [Setup & Installation](#-setup--installation)
 - [Implementation Overview](#-implementation-overview)
 - [Challenges Faced](#-challenges-faced)
-- [Future Enhancements](#-future-enhancements)
 - [Citations & References](#-citations--references)
 
 ---
