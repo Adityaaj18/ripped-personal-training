@@ -114,3 +114,39 @@ cp .env.example .env
 
 # Start development server
 npm run dev
+```
+## ⚠️ Challenges Faced
+
+### 🔄 Serverless Limitations
+Appwrite serverless functions occasionally experienced cold starts and execution delays.  
+**Solution:** Implemented retry logic and optimized function timeouts to mitigate the impact.
+
+### 🔐 Access Control
+Managing roles and permissions in Appwrite requires manual setup.  
+**Solution:** Enforced access control on both frontend and backend using claim-based conditions.
+
+### 📱 SMS Delivery Issues
+Delays were observed with Twilio SMS in certain regions, affecting user trust.  
+**Planned Enhancement:** Introduce a fallback notification system using email for better reliability.
+
+## 📚 Citations & References
+
+1. [Appwrite Documentation](https://appwrite.io/docs)  
+   Official documentation for Appwrite – backend services including authentication, database, functions, and storage.
+
+2. [Twilio SMS API](https://www.twilio.com/docs/sms)  
+   Learn how to send and manage SMS messages with Twilio’s programmable messaging API.
+
+3. [Next.js Documentation](https://nextjs.org/docs)  
+   The official documentation for building full-stack React apps with Next.js.
+
+4. [TailwindCSS Guide](https://tailwindcss.com/docs)  
+   Comprehensive utility-first CSS framework documentation for rapidly building modern UIs.
+
+5. [Sentry JavaScript Docs](https://docs.sentry.io/platforms/javascript/)  
+   Guides and SDK references for monitoring performance and tracking errors in JavaScript applications using Sentry.
+
+6. [ShadCN UI Components](https://ui.shadcn.dev/)  
+   Accessible and customizable components built on top of Radix UI, styled with Tailwind.
+
+
