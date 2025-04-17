@@ -18,12 +18,14 @@ const AppointmentModal = ({
   userId,
   appointment,
 }: {
-  type: "schedule" | "cancel";
+  type: "schedule" | "cancel" | "delete";
   customerId: "string";
   userId: "string";
   appointment?: Appointment;
 }) => {
   const [open, setOpen] = useState(false);
+  console.log('type', type);
+  
   return (
     <div>
       <Dialog open={open} onOpenChange={setOpen}>

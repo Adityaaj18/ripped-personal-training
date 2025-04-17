@@ -61,22 +61,22 @@ export const Trainers = [
     image: "/assets/images/dorian.png",
     name: "Dorian Yates",
   },
-  {
-    image: "/assets/images/dr-remirez.png",
-    name: "Alex Ramirez",
-  },
-  {
-    image: "/assets/images/dr-lee.png",
-    name: "Jasmine Lee",
-  },
-  {
-    image: "/assets/images/dr-cruz.png",
-    name: "Alyana Cruz",
-  },
-  {
-    image: "/assets/images/dr-sharma.png",
-    name: "Hardik Sharma",
-  },
+  // {
+  //   image: "/assets/images/dr-remirez.png",
+  //   name: "Alex Ramirez",
+  // },
+  // {
+  //   image: "/assets/images/dr-lee.png",
+  //   name: "Jasmine Lee",
+  // },
+  // {
+  //   image: "/assets/images/dr-cruz.png",
+  //   name: "Alyana Cruz",
+  // },
+  // {
+  //   image: "/assets/images/dr-sharma.png",
+  //   name: "Hardik Sharma",
+  // },
 ];
 
 export const StatusIcon = {

@@ -16,7 +16,7 @@ export default async function NewAppointment({
       <section className="remove-scrollbar container ">
         <div className="sub-container max-w-[860px] flex-1 justify-between">
           <Image
-            src="/assets/icons/logo-full2.svg"
+            src="/assets/icons/logo-full2.png"
             height={1000}
             width={1000}
             alt="ripped"
