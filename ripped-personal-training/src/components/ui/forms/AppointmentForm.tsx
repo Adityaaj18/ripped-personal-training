@@ -168,7 +168,7 @@ const AppointmentForm = ({
             </p>
           </section>
         )}
-        {type === "schedule" && (
+        {type === "create" && (
           <>
             <CustomFormField
               fieldType={FormFieldType.SELECT}
