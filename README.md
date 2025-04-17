@@ -46,12 +46,7 @@ The Training Appointments Management System provides a structured interface for 
 - Real-time chat
 
 
----
 
-## 🧱 System Architecture
-
-
----
 
 ## ✨ Core Features
 
@@ -125,8 +120,8 @@ Managing roles and permissions in Appwrite requires manual setup.
 **Solution:** Enforced access control on both frontend and backend using claim-based conditions.
 
 ### 📱 SMS Delivery Issues
-Delays were observed with Twilio SMS in certain regions, affecting user trust.  
-**Planned Enhancement:** Introduce a fallback notification system using email for better reliability.
+Delays and restrictions were observed with Twilio SMS in certain regions, affecting user trust.  
+
 
 ## 📚 Citations & References
 
